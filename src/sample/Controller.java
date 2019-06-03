@@ -64,4 +64,11 @@ public class Controller implements Initializable {
             }
         }
     }
+
+    public void deleteSemester() {
+        int position = lv1.getSelectionModel().getSelectedIndex();
+        if (lv1.getSelectionModel().getSelectedItems() != null && notesModel != null && position != -1) {
+            notesModel.remove(position);
+        }
+    }
 }

@@ -16,7 +16,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#newSemester" text="Add Semester" />
                   <MenuItem mnemonicParsing="false" onAction="#editSemester" text="Edit Semester" />
-                  <MenuItem mnemonicParsing="false" text="Delete Semester" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteSemester" text="Delete Semester" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

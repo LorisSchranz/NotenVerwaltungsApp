@@ -45,21 +45,32 @@ public class SemesterController implements Initializable {
         boolean canSave = true;
         boolean canEdit = true;
         ErrorLabel.setText("");
-        String school = School.getText();
+        String school = School.getText().trim();
         int semester = 0;
         try {
-            semester = Integer.parseInt(Semester.getText());
+            semester = Integer.parseInt(Semester.getText().trim());
         } catch (Exception e){
             System.out.println(e);
         }
         ErrorLabel.setText("Errors: ");
+        if (myModel.size() != 0) {
+            for (int i = 0; i < myModel.size(); i++) {
+                if (semester == myModel.get(i).getNumber() && i != Position && school.equals(myModel.get(i).getSchool())) {
+                    canSave = false;
+                    ErrorLabel.setText(ErrorLabel.getText() + "Already taken Topic ");
+                }
+            }
+        }
+        if (semester<= 0) {
+            canSave = false;
+            ErrorLabel.setText(ErrorLabel.getText() + "Invalid Semester");
+        }
+        if (Position == -1) {
+            canEdit = false;
+        }
         if (school.equals("")) {
             canSave = false;
-            ErrorLabel.setText(ErrorLabel.getText() + "No Name ");
-        }
-        if (semester <= 0 ){
-            canSave = false;
-            ErrorLabel.setText(ErrorLabel.getText() + "Impossible Semester");
+            ErrorLabel.setText(ErrorLabel.getText() + "No School ");
         }
         if (canSave && !canEdit) {
             myModel.add(new Semester(semester, school));
@@ -67,6 +78,7 @@ public class SemesterController implements Initializable {
             stage.close();
         } else if (canSave) {
             myModel.add(new Semester(semester, school));
+            myModel.remove(Position);
             Stage stage = (Stage) Save.getScene().getWindow();
             stage.close();
         }
