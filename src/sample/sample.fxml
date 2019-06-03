@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Label layoutX="14.0" layoutY="41.0" prefHeight="27.0" prefWidth="63.0" text="Semester:" />
+      <MenuBar prefHeight="29.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Semester">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#newSemester" text="Add Semester" />
+                  <MenuItem mnemonicParsing="false" onAction="#editSemester" text="Edit Semester" />
+                  <MenuItem mnemonicParsing="false" text="Delete Semester" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ListView fx:id="lv1" layoutX="14.0" layoutY="68.0" prefHeight="317.0" prefWidth="134.0" />
+   </children>
+</AnchorPane>
