@@ -1,4 +1,4 @@
-package sample;
+package sample.java;
 
 public class Topic {
     private String name;
