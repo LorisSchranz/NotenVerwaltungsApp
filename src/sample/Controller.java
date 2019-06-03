@@ -43,4 +43,25 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void editSemester() {
+        int position = lv1.getSelectionModel().getSelectedIndex();
+        if (lv1.getSelectionModel().getSelectedItems() != null && notesModel != null && position != -1) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Semester.fxml"));
+                Parent editSemester = fxmlLoader.load();
+                SemesterController semesterController = fxmlLoader.getController();
+                semesterController.setModel(notesModel);
+                semesterController.setEdit(position);
+                Scene sceneEdit = new Scene(editSemester, 500, 200);
+                Stage stageEdit = new Stage();
+                stageEdit.setTitle("Edit Semester");
+                stageEdit.setResizable(false);
+                stageEdit.setScene(sceneEdit);
+                stageEdit.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
