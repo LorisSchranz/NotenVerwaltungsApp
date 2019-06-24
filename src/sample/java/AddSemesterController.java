@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 public class AddSemesterController implements Initializable {
     public TextField Semester;
     public TextField School;
+    public Label ErrorLabel;
     private GridPane gridPane;
     private List<Semester> myList = FXCollections.observableArrayList();
 
@@ -29,23 +30,38 @@ public class AddSemesterController implements Initializable {
     }
 
     void setList(List list) {
-        list = myList;
+        myList = list;
     }
 
     public void confirmAddSubject(ActionEvent event) {
         if (!Semester.getText().isEmpty() && !School.getText().isEmpty()) {
-            Button button = new Button(Semester.getText() + ". " + School.getText() + " Semester");
-            button.setOnAction(e -> openSemester());
-            if ((counter % 2) == 0) {
-                gridPane.add(button, 0, gridPane.getChildren().size());
-            } else {
-                gridPane.add(button, 1, gridPane.getChildren().size() - 1);
+            String ID = (Semester.getText() + "_" + School.getText()).trim();
+            Boolean canSave = true;
+            for(int i = 0; i<myList.size(); i++){
+                try {
+                    if(ID.equals(myList.get(i).getId())){
+                        canSave = false;
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
-            counter++;
-            Semester semester = new Semester();
-            semester.setId(Semester.getText() + "_" + School.getText());
-            myList.add(semester);
-            ((Node) (event.getSource())).getScene().getWindow().hide();
+            if(canSave) {
+                Button button = new Button(Semester.getText() + ". " + School.getText() + " Semester");
+                button.setOnAction(e -> openSemester());
+                if ((counter % 2) == 0) {
+                    gridPane.add(button, 0, gridPane.getChildren().size());
+                } else {
+                    gridPane.add(button, 1, gridPane.getChildren().size() - 1);
+                }
+                counter++;
+                Semester semester = new Semester();
+                semester.setId(ID);
+                myList.add(semester);
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } else {
+                ErrorLabel.setText("Dieses Semester gibt es schon");
+            }
         }
     }
 
@@ -57,6 +73,7 @@ public class AddSemesterController implements Initializable {
             semesterController.setGridpane(gridPane);
             for (int i = 0; i<myList.size(); i++){
                 if(myList.get(i).getId().equals(Semester.getText() + "_" + School.getText())){
+                    semesterController.setTitle(myList.get(i).getId());
                     semesterController.setList(myList.get(i));
                 }
             }

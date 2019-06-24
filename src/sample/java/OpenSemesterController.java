@@ -1,24 +1,21 @@
 package sample.java;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class OpenSemesterController implements Initializable {
-    private Semester mySemester;
     @FXML
-    public Label labelSemester = new Label();
+    public GridPane gridPaneSubject;
+    @FXML
+    public Label labelSemester;
+
+    private Semester mySemester;
 
     public void editSemester(ActionEvent event) {
 
@@ -28,14 +25,18 @@ public class OpenSemesterController implements Initializable {
     }
 
     public void setGridpane(GridPane gridPane) {
+        this.gridPaneSubject = gridPane;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        labelSemester.setText(mySemester.getId());
     }
 
     public void setList(Semester semester) {
         mySemester = semester;
+    }
+
+    public void setTitle(String Title) {
+        labelSemester.setText(Title.substring(0,Title.indexOf("_")) + ". " + Title.substring(Title.indexOf("_") + 1) + " Semester");
     }
 }
